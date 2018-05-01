@@ -2,5 +2,4 @@ package globe
 
 type Costunits []Costunit
 
-type Costunit struct {
-}
+type Costunit = Costcenter
