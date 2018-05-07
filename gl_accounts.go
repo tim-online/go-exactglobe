@@ -54,6 +54,10 @@ func (g GLAccount) MarshalXML(e *xml.Encoder, start xml.StartElement) error {
 	return omitempty.MarshalXML(g, e, start)
 }
 
-func (g GLAccount) IsEmpty() bool {
+func (g *GLAccount) IsEmpty() bool {
+	if g == nil {
+		return true
+	}
+
 	return zero.IsZero(g)
 }

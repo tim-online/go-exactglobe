@@ -1,5 +1,7 @@
 package globe
 
+type Territories []Territory
+
 type Territory struct {
 	// Attributes
 	Code string `xml:"code,attr,omitempty"`

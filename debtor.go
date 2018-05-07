@@ -1,10 +1,17 @@
 package globe
 
+import (
+	"encoding/xml"
+
+	"github.com/cydev/zero"
+	"github.com/tim-online/go-exactglobe/omitempty"
+)
+
 // The maximum length of the number attribute is 6. If code is filled, then
 // number can be left empty.
 type Debtor struct {
 	// Attributes
-	Code   string `xml:"code"`
+	Code   string `xml:"code,attr"`
 	Number string `xml:"number,attr,omitempty"`
 	Type   string `xml:"type,attr,omitempty"` // { A | B | C | D | E | L | N | P | R | S | T }
 
@@ -37,4 +44,12 @@ type Debtor struct {
 	Territory              Territory       `xml:"Territory,omitempty"`
 	SalesCommission        SalesCommission `xml:"SalesCommission,omitempty"`
 	ApplyShippingCharges   bool            `xml:"ApplyShippingCharges,omitempty"`
+}
+
+func (d Debtor) MarshalXML(e *xml.Encoder, start xml.StartElement) error {
+	return omitempty.MarshalXML(d, e, start)
+}
+
+func (d Debtor) IsEmpty() bool {
+	return zero.IsZero(d)
 }

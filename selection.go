@@ -1,6 +1,6 @@
 package globe
 
-type Country struct {
+type Selection struct {
 	// Attributes
 	Code string `xml:"code,attr"`
 
