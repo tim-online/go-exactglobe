@@ -1,5 +1,12 @@
 package globe
 
+import (
+	"encoding/xml"
+
+	"github.com/cydev/zero"
+	"github.com/tim-online/go-exactglobe/omitempty"
+)
+
 type DocumentAttachment struct {
 	// [ number = integer ]
 	// [ code = string ]
@@ -35,4 +42,12 @@ type DocumentAttachment struct {
 	// <FinEntry> (0,1)
 	// <Description> (0,1)
 	// <GenerateVersion> (0,1)
+}
+
+func (d DocumentAttachment) MarshalXML(e *xml.Encoder, start xml.StartElement) error {
+	return omitempty.MarshalXML(d, e, start)
+}
+
+func (d DocumentAttachment) IsEmpty() bool {
+	return zero.IsZero(d)
 }

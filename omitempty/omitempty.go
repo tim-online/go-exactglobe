@@ -59,6 +59,11 @@ func MarshalXML(obj interface{}, e *xml.Encoder, start xml.StartElement) error {
 		valueField := val.Field(i)
 		f := valueField.Interface()
 
+		if isNil(f) {
+			fs[i].Tag = reflect.StructTag(`xml:"-"`)
+			continue
+		}
+
 		if isempty, ok := f.(IsEmptier); ok {
 			if !isempty.IsEmpty() {
 				continue
@@ -85,4 +90,14 @@ func fieldHasOmitEmpty(field reflect.StructField, encoder string) bool {
 		}
 	}
 	return false
+}
+
+func isNil(a interface{}) bool {
+	if a == nil {
+		return true
+	}
+	// return a == reflect.Zero(reflect.TypeOf(a)).Interface()
+	return reflect.DeepEqual(a, reflect.Zero(reflect.TypeOf(a)).Interface())
+	// defer func() { recover() }()
+	// return a == nil || reflect.ValueOf(a).IsNil()
 }

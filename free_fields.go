@@ -1,11 +1,26 @@
 package globe
 
+import (
+	"encoding/xml"
+
+	"github.com/cydev/zero"
+	"github.com/tim-online/go-exactglobe/omitempty"
+)
+
 type FreeFields struct {
 	FreeTexts   FreeTexts   `xml:"FreeTexts,omitempty"`
 	FreeDates   FreeDates   `xml:"FreeDates,omitempty"`
 	FreeNumbers FreeNumbers `xml:"FreeNumbers,omitempty"`
 	FreeYesNos  FreeYesNos  `xml:"FreeYesNos,omitempty"`
 	FreeOptions FreeOptions `xml:"FreeOptions,omitempty"`
+}
+
+func (f FreeFields) MarshalXML(e *xml.Encoder, start xml.StartElement) error {
+	return omitempty.MarshalXML(f, e, start)
+}
+
+func (f FreeFields) IsEmpty() bool {
+	return zero.IsZero(f)
 }
 
 type FreeTexts []FreeText

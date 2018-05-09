@@ -1,5 +1,12 @@
 package globe
 
+import (
+	"encoding/xml"
+
+	"github.com/cydev/zero"
+	"github.com/tim-online/go-exactglobe/omitempty"
+)
+
 type Resources []Resource
 
 type Resource struct {
@@ -39,4 +46,12 @@ type Resource struct {
 	Skills        Skills       `xml:"Skills,omitempty"`
 	Territories   Territories  `xml:"Territories,omitempty"`
 	FreeFields    FreeFields   `xml:"FreeFields,omitempty"`
+}
+
+func (r Resource) MarshalXML(e *xml.Encoder, start xml.StartElement) error {
+	return omitempty.MarshalXML(r, e, start)
+}
+
+func (r Resource) IsEmpty() bool {
+	return zero.IsZero(r)
 }

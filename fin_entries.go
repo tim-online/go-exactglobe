@@ -19,18 +19,18 @@ type FinEntry struct {
 	ID       string `xml:"ID,attr,omitempty"`       // ID to identify the Entry.
 	Sequence int    `xml:"sequence,attr,omitempty"` // gbkmut.volgnr5
 
-	Division      Division      `xml:"Division"`
-	DocumentDate  Date          `xml:"DocumentDate"` // gbkmut.docdate
-	FinYear       FinYear       `xml:"FinYear"`
-	FinPeriod     FinPeriod     `xml:"FinPeriod"`
-	Date          Date          `xml:"Date"`
-	Journal       Journal       `xml:"Journal"`
-	Amount        float64       `xml:"Amount"`
-	FreeFields    FreeFields    `xml:"FreeFields"`
-	Documents     Documents     `xml:"Documents"`
+	Division      Division      `xml:"Division,omitempty"`
+	DocumentDate  Date          `xml:"DocumentDate,omitempty"` // gbkmut.docdate
+	FinYear       FinYear       `xml:"FinYear,omitempty"`
+	FinPeriod     FinPeriod     `xml:"FinPeriod,omitempty"`
+	Date          Date          `xml:"Date,omitempty"`
+	Journal       Journal       `xml:"Journal,omitempty"`
+	Amount        float64       `xml:"Amount,omitempty"`
+	FreeFields    FreeFields    `xml:"FreeFields,omitempty"`
+	Documents     Documents     `xml:"Documents,omitempty"`
 	FinEntryLine  FinEntryLine  `xml:"FinEntryLine"`
-	PaymentTerms  PaymentTerms  `xml:"PaymentTerms"`
-	BankStatement BankStatement `xml:"BankStatement"`
+	PaymentTerms  PaymentTerms  `xml:"PaymentTerms,omitempty"`
+	BankStatement BankStatement `xml:"BankStatement,omitempty"`
 }
 
 func (f FinEntry) MarshalXML(e *xml.Encoder, start xml.StartElement) error {

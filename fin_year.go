@@ -11,7 +11,7 @@ type FinYear struct {
 	// Attributes
 	Number int `xml:"number,attr,omitempty"`
 
-	FinPeriod FinPeriod `xml:"FinPeriod"`
+	FinPeriod FinPeriod `xml:"FinPeriod,omitempty"`
 }
 
 func (f FinYear) MarshalXML(e *xml.Encoder, start xml.StartElement) error {

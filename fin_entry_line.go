@@ -11,11 +11,12 @@ import (
 // docs/XML-Schema.html#ELEMENT_FinEntryLine
 
 type FinEntryLine struct {
+	// Attributes
 	Number          int              `xml:"number,attr,omitempty"`
-	Type            FinEntryLineType `xml:"type,attr,omitempty"`    // { B | C | E | F | I | N | O | P | V | X }
-	Subype          string           `xml:"subtype,attr,omitempty"` // { N | K | C | T | Q | Z | Y | R | P | S | D | F | M | L | E | I | V | A | B | G | H | J | W }
-	Transactiontype int              `xml:"transactiontype,attr,omitempty"`
-	Linecode        string           `xml:"linecode,attr,omitempty"` // { A | B | C | D | E | F | G | H | I | J | K | L | M | N | O | P | Q | R | S | T | U | X }
+	Type            FinEntryLineType `xml:"type,attr,omitempty"`            // { B | C | E | F | I | N | O | P | V | X }
+	Subype          string           `xml:"subtype,attr,omitempty"`         // { N | K | C | T | Q | Z | Y | R | P | S | D | F | M | L | E | I | V | A | B | G | H | J | W }
+	Transactiontype int              `xml:"transactiontype,attr,omitempty"` // tag goes obsolete, is replaced by attribute in FinEntryLine
+	Linecode        string           `xml:"linecode,attr,omitempty"`        // { A | B | C | D | E | F | G | H | I | J | K | L | M | N | O | P | Q | R | S | T | U | X }
 	Code            string           `xml:"code,attr,omitempty"`
 	ID              string           `xml:"ID,attr,omitempty"`
 	Correction      bool             `xml:"correction,attr,omitempty"`
@@ -39,7 +40,7 @@ type FinEntryLine struct {
 	WarehouseLocation     WarehouseLocation  `xml:"WarehouseLocation,omitempty"`
 	Project               Project            `xml:"Project,omitempty"`
 	Quantity              float64            `xml:"Quantity,omitempty"`
-	Amount                float64            `xml:"Amount,omitempty"`
+	Amount                Amount             `xml:"Amount,omitempty"`
 	ForeignAmount         ForeignAmount      `xml:"ForeignAmount,omitempty"`
 	OffsetGL              string             `xml:"OffsetGL,omitempty"`
 	TransactionType       int                `xml:"TransactionType,omitempty"` // gbkmut.transactiontype (tag goes obsolete, is replaced by attribute in FinEntryLine)

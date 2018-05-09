@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"log"
 	"testing"
+	"time"
 
 	xsdvalidate "github.com/terminalstatic/go-xsd-validate"
 	globe "github.com/tim-online/go-exactglobe"
@@ -20,7 +21,30 @@ func TestFinEntriesXSD(t *testing.T) {
 	defer xsdhandler.Free()
 
 	finEntries := globe.FinEntries{
-		{},
+		{
+			Entry:        "1",
+			DocumentDate: globe.Date{time.Now()},
+			FinYear:      globe.FinYear{Number: 2018},
+			FinPeriod:    globe.FinPeriod{Number: 5},
+			Date:         globe.Date{time.Now()},
+			Journal:      globe.Journal{Code: "96", Type: "M"},
+			FinEntryLine: globe.FinEntryLine{
+				Date:        globe.Date{time.Now()},
+				FinYear:     globe.FinYear{Number: 2018},
+				FinPeriod:   globe.FinPeriod{Number: 5},
+				GLAccount:   globe.GLAccount{Code: "1271", Type: "W"},
+				Description: "test",
+				Amount: globe.Amount{
+					Currency: globe.Currency{
+						Code: "EUR",
+					},
+					Value: 100.0,
+				},
+				Payment: globe.Payment{
+					InvoiceDueDate: globe.Date{time.Now()},
+				},
+			},
+		},
 	}
 	inXML, err := xml.MarshalIndent(finEntries, "", "  ")
 	if err != nil {

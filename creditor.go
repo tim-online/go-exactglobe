@@ -1,5 +1,12 @@
 package globe
 
+import (
+	"encoding/xml"
+
+	"github.com/cydev/zero"
+	"github.com/tim-online/go-exactglobe/omitempty"
+)
+
 type Creditor struct {
 	// Attributes
 	Code   string `xml:"code,attr"`
@@ -23,4 +30,12 @@ type Creditor struct {
 	PaymentCondition PaymentCondition `xml:"PaymentCondition,omitempty"`
 	VATNumber        string           `xml:"VATNumber,omitempty"`
 	PaymentMethod    PaymentMethod    `xml:"PaymentMethod,omitempty"`
+}
+
+func (c Creditor) MarshalXML(e *xml.Encoder, start xml.StartElement) error {
+	return omitempty.MarshalXML(c, e, start)
+}
+
+func (c Creditor) IsEmpty() bool {
+	return zero.IsZero(c)
 }

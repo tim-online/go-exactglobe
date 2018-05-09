@@ -1,5 +1,12 @@
 package globe
 
+import (
+	"encoding/xml"
+
+	"github.com/cydev/zero"
+	"github.com/tim-online/go-exactglobe/omitempty"
+)
+
 type Costcenters []Costcenter
 
 type Costcenter struct {
@@ -15,4 +22,12 @@ type Costcenter struct {
 	GLAccount       *GLAccount           `xml:"GLAccount,omitempty"`
 	GLOffset        *GLAccount           `xml:"GLOffset"`
 	ExtraFields     ExtraFields          `xml:"ExtraFields,omitempty"`
+}
+
+func (c Costcenter) MarshalXML(e *xml.Encoder, start xml.StartElement) error {
+	return omitempty.MarshalXML(c, e, start)
+}
+
+func (c Costcenter) IsEmpty() bool {
+	return zero.IsZero(c)
 }

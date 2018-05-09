@@ -1,5 +1,12 @@
 package globe
 
+import (
+	"encoding/xml"
+
+	"github.com/cydev/zero"
+	"github.com/tim-online/go-exactglobe/omitempty"
+)
+
 type PriceList struct {
 	// Attributes
 	Code string `xml:"code,attr"`
@@ -13,4 +20,12 @@ type PriceList struct {
 	AccountType             string       `xml:"AccountType,omitempty"`
 	AccountStatus           string       `xml:"AccountStatus,omitempty"`
 	AccountClassificationId string       `xml:"AccountClassificationId,omitempty"`
+}
+
+func (p PriceList) MarshalXML(e *xml.Encoder, start xml.StartElement) error {
+	return omitempty.MarshalXML(p, e, start)
+}
+
+func (p PriceList) IsEmpty() bool {
+	return zero.IsZero(p)
 }

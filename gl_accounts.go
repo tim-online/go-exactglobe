@@ -4,6 +4,7 @@ import (
 	"encoding/xml"
 
 	"github.com/cydev/zero"
+	errors "github.com/tim-online/go-errors"
 	"github.com/tim-online/go-exactglobe/omitempty"
 )
 
@@ -11,16 +12,16 @@ type GLAccounts []GLAccount
 
 type GLAccount struct {
 	// Attributes
-	Code                  string `xml:"code,attr"`
-	Type                  string `xml:"type,attr,omitempty"`         // { B | W }
-	Subtype               string `xml:"subtype,attr,omitempty"`      // { A | B | C | D | G | H | J | K | N | S | T | V }
-	Side                  string `xml:"side,attr,omitempty"`         // { D | C | G } ]
-	Presentation          string `xml:"presentation,attr,omitempty"` // { J | L | N } ]
-	Blocked               bool   `xml:"blocked,attr,omitempty"`
-	Inflationadjustment   string `xml:"inflationadjustment,attr,omitempty,omitempty"` // { N | I | A }
-	Invoiceregtype        string `xml:"invoiceregtype,attr,omitempty"`                // { I | V | N }
-	Purchasevatreturntype string `xml:"purchasevatreturntype,attr,omitempty"`         // { A | D | G | I | O }
-	Rewardtype            string `xml:"rewardtype,attr,omitempty"`                    // { C | E | K | V | N }
+	Code                  string        `xml:"code,attr"`
+	Type                  GLAccountType `xml:"type,attr,omitempty"`         // { B | W }
+	Subtype               string        `xml:"subtype,attr,omitempty"`      // { A | B | C | D | G | H | J | K | N | S | T | V }
+	Side                  string        `xml:"side,attr,omitempty"`         // { D | C | G } ]
+	Presentation          string        `xml:"presentation,attr,omitempty"` // { J | L | N } ]
+	Blocked               bool          `xml:"blocked,attr,omitempty"`
+	Inflationadjustment   string        `xml:"inflationadjustment,attr,omitempty,omitempty"` // { N | I | A }
+	Invoiceregtype        string        `xml:"invoiceregtype,attr,omitempty"`                // { I | V | N }
+	Purchasevatreturntype string        `xml:"purchasevatreturntype,attr,omitempty"`         // { A | D | G | I | O }
+	Rewardtype            string        `xml:"rewardtype,attr,omitempty"`                    // { C | E | K | V | N }
 
 	// Description                string            `xml:"Description,omitempty"`
 	MultiDescriptions          []string          `xml:"Description,omitempty"`
@@ -54,10 +55,21 @@ func (g GLAccount) MarshalXML(e *xml.Encoder, start xml.StartElement) error {
 	return omitempty.MarshalXML(g, e, start)
 }
 
-func (g *GLAccount) IsEmpty() bool {
-	if g == nil {
-		return true
+func (g GLAccount) IsEmpty() bool {
+	return zero.IsZero(g)
+}
+
+type GLAccountType string
+
+// B=Balance. W=Profit - Loss
+func (g GLAccountType) Validate() error {
+	valid := []GLAccountType{"B", "W"}
+
+	for _, v := range valid {
+		if g == v {
+			return nil
+		}
 	}
 
-	return zero.IsZero(g)
+	return errors.Errorf("Invalid GLAccountType '%s'", g)
 }

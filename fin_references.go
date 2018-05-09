@@ -1,5 +1,12 @@
 package globe
 
+import (
+	"encoding/xml"
+
+	"github.com/cydev/zero"
+	"github.com/tim-online/go-exactglobe/omitempty"
+)
+
 type FinReferences struct {
 	// [ TransactionOrigin = token: { B | I | P | T | N | U | S } ]>
 	// sequence	 	<ProcessNumberJournal> (0,1)
@@ -14,4 +21,12 @@ type FinReferences struct {
 	// <StockTrackingNumber> (0,1)
 	// <CashRegister> (0,1)
 	// <ReportDate> (0,1)
+}
+
+func (f FinReferences) MarshalXML(e *xml.Encoder, start xml.StartElement) error {
+	return omitempty.MarshalXML(f, e, start)
+}
+
+func (f FinReferences) IsEmpty() bool {
+	return zero.IsZero(f)
 }
