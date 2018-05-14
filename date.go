@@ -3,7 +3,6 @@ package globe
 import (
 	"encoding/json"
 	"encoding/xml"
-	"log"
 	"time"
 
 	"github.com/cydev/zero"
@@ -16,9 +15,7 @@ type Date struct {
 
 func (d Date) MarshalXML(e *xml.Encoder, start xml.StartElement) error {
 	layout := "2006-01-02"
-	log.Printf("%+v", d.Time)
 	return e.EncodeElement(d.Time.Format(layout), start)
-	// return omitempty.MarshalXML(d, e, start)
 }
 
 func (d Date) IsEmpty() bool {
@@ -28,7 +25,6 @@ func (d Date) IsEmpty() bool {
 func (d *Date) UnmarshalJSON(b []byte) error {
 	var s string
 	err := json.Unmarshal(b, &s)
-	log.Printf("s: %s", s)
 	if err != nil {
 		return err
 	}

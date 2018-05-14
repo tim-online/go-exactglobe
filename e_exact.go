@@ -1,10 +1,13 @@
 package globe
 
-import "encoding/xml"
+import (
+	"encoding/xml"
+
+	"github.com/cydev/zero"
+	"github.com/tim-online/go-exactglobe/omitempty"
+)
 
 type EExact struct {
-	XMLName xml.Name `xml:"eExact"`
-
 	// Attributes
 	SchemaVersion string `xml:"schemaVersion,attr,omitempty"`
 
@@ -21,7 +24,7 @@ type EExact struct {
 	Journals              Journals              `xml:"Journals,omitempty"`
 	VATs                  VATs                  `xml:"VATs,omitempty"`
 	FinEntries            FinEntries            `xml:"FinEntries,omitempty"`
-	GLEntries             GLEntries             `xml:"GLEntries,omitempty"`
+	GLEntries             GLEntries             `xml:"GLEntries>GLEntry,omitempty"`
 	Budgets               Budgets               `xml:"Budgets,omitempty"`
 	InternalUses          InternalUses          `xml:"InternalUses,omitempty"`
 	DocumentTypes         DocumentTypes         `xml:"DocumentTypes,omitempty"`
@@ -43,4 +46,13 @@ type EExact struct {
 	Currencies            Currencies            `xml:"Currencies,omitempty"`
 	Topics                Topics                `xml:"Topics,omitempty"`
 	Messages              Messages              `xml:"Messages,omitempty"`
+}
+
+func (e EExact) MarshalXML(enc *xml.Encoder, start xml.StartElement) error {
+	start.Name = xml.Name{Local: "eExact"}
+	return omitempty.MarshalXML(e, enc, start)
+}
+
+func (e EExact) IsEmpty() bool {
+	return zero.IsZero(e)
 }

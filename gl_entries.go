@@ -25,7 +25,7 @@ type GLEntry struct {
 	Amount        Amount        `xml:"Amount,omitempty"`
 	ForeignAmount ForeignAmount `xml:"ForeignAmount,omitempty"`
 	FreeFields    FreeFields    `xml:"FreeFields,omitempty"`
-	FinEntryLines FinEntryLines `xml:">FinEntryLine"`
+	FinEntryLines FinEntryLines `xml:"FinEntryLine"`
 	PaymentTerms  PaymentTerms  `xml:"PaymentTerms,omitempty"`
 	BankStatement BankStatement `xml:"BankStatement,omitempty"`
 }
