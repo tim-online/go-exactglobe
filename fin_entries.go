@@ -25,7 +25,7 @@ type FinEntry struct {
 	FinPeriod     FinPeriod     `xml:"FinPeriod,omitempty"`
 	Date          Date          `xml:"Date,omitempty"`
 	Journal       Journal       `xml:"Journal,omitempty"`
-	Amount        float64       `xml:"Amount,omitempty"`
+	Amount        Amount        `xml:"Amount,omitempty"`
 	FreeFields    FreeFields    `xml:"FreeFields,omitempty"`
 	Documents     Documents     `xml:"Documents,omitempty"`
 	FinEntryLine  FinEntryLine  `xml:"FinEntryLine"`

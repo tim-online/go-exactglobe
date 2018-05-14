@@ -12,16 +12,16 @@ type GLAccounts []GLAccount
 
 type GLAccount struct {
 	// Attributes
-	Code                  string        `xml:"code,attr"`
-	Type                  GLAccountType `xml:"type,attr,omitempty"`         // { B | W }
-	Subtype               string        `xml:"subtype,attr,omitempty"`      // { A | B | C | D | G | H | J | K | N | S | T | V }
-	Side                  string        `xml:"side,attr,omitempty"`         // { D | C | G } ]
-	Presentation          string        `xml:"presentation,attr,omitempty"` // { J | L | N } ]
-	Blocked               bool          `xml:"blocked,attr,omitempty"`
-	Inflationadjustment   string        `xml:"inflationadjustment,attr,omitempty,omitempty"` // { N | I | A }
-	Invoiceregtype        string        `xml:"invoiceregtype,attr,omitempty"`                // { I | V | N }
-	Purchasevatreturntype string        `xml:"purchasevatreturntype,attr,omitempty"`         // { A | D | G | I | O }
-	Rewardtype            string        `xml:"rewardtype,attr,omitempty"`                    // { C | E | K | V | N }
+	Code                  string           `xml:"code,attr"`
+	Type                  GLAccountType    `xml:"type,attr,omitempty"`         // { B | W }
+	Subtype               GLAccountSubtype `xml:"subtype,attr,omitempty"`      // { A | B | C | D | G | H | J | K | N | S | T | V }
+	Side                  string           `xml:"side,attr,omitempty"`         // { D | C | G } ]
+	Presentation          string           `xml:"presentation,attr,omitempty"` // { J | L | N } ]
+	Blocked               bool             `xml:"blocked,attr,omitempty"`
+	Inflationadjustment   string           `xml:"inflationadjustment,attr,omitempty,omitempty"` // { N | I | A }
+	Invoiceregtype        string           `xml:"invoiceregtype,attr,omitempty"`                // { I | V | N }
+	Purchasevatreturntype string           `xml:"purchasevatreturntype,attr,omitempty"`         // { A | D | G | I | O }
+	Rewardtype            string           `xml:"rewardtype,attr,omitempty"`                    // { C | E | K | V | N }
 
 	// Description                string            `xml:"Description,omitempty"`
 	MultiDescriptions          []string          `xml:"Description,omitempty"`
@@ -72,4 +72,19 @@ func (g GLAccountType) Validate() error {
 	}
 
 	return errors.Errorf("Invalid GLAccountType '%s'", g)
+}
+
+type GLAccountSubtype string
+
+// A=Asset Account, B=Bank Account, C=Creditor Account, D=Debtor Account, G=Stock Account, H=Human resource Account, J=Revenue Account, K=Expense Acccount, N=Neutral Account, S=Cash Account, T=Suspence Account, V=VAT Account
+func (g GLAccountSubtype) Validate() error {
+	valid := []GLAccountSubtype{"A", "B", "C", "D", "G", "H", "J", "K", "N", "S", "T", "V"}
+
+	for _, v := range valid {
+		if g == v {
+			return nil
+		}
+	}
+
+	return errors.Errorf("Invalid GLAccountSubtype '%s'", g)
 }

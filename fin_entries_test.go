@@ -23,6 +23,7 @@ func TestFinEntriesXSD(t *testing.T) {
 	finEntries := globe.FinEntries{
 		{
 			Entry:        "1",
+			Division:     globe.Division{Code: "020"},
 			DocumentDate: globe.Date{time.Now()},
 			FinYear:      globe.FinYear{Number: 2018},
 			FinPeriod:    globe.FinPeriod{Number: 5},

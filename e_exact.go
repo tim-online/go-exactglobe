@@ -1,8 +1,12 @@
 package globe
 
+import "encoding/xml"
+
 type EExact struct {
+	XMLName xml.Name `xml:"eExact"`
+
 	// Attributes
-	SchemaVersion string `xml:"schemaVersion,attr"`
+	SchemaVersion string `xml:"schemaVersion,attr,omitempty"`
 
 	// Nodes
 	Settings              Settings              `xml:"Settings,omitempty"`
