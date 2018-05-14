@@ -10,6 +10,8 @@ import (
 
 // docs/XML-Schema.html#ELEMENT_FinEntryLine
 
+type FinEntryLines []FinEntryLine
+
 type FinEntryLine struct {
 	// Attributes
 	Number          int              `xml:"number,attr,omitempty"`
