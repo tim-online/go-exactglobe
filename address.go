@@ -17,7 +17,7 @@ type Address struct {
 	City            string          `xml:"City,omitempty"`
 	County          string          `xml:"County,omitempty"`
 	State           string          `xml:"State,omitempty"`
-	Country         string          `xml:"Country"`
+	Country         Country         `xml:"Country"`
 	IsoCountry      string          `xml:"IsoCountry,omitempty"`
 	IsoRegion       string          `xml:"IsoRegion,omitempty"`
 	Phone           string          `xml:"Phone,omitempty"`
