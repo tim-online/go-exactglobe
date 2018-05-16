@@ -33,6 +33,14 @@ func TestEExact(t *testing.T) {
 				},
 			},
 		},
+		Accounts: globe.Accounts{
+			{
+				Name: "Name 1",
+			},
+			{
+				Name: "Name 2",
+			},
+		},
 	}
 	inXML, err := xml.MarshalIndent(eExact, "", "  ")
 	if err != nil {

@@ -19,7 +19,11 @@ func TestAccount(t *testing.T) {
 	}
 	defer xsdhandler.Free()
 
-	root := globe.Account{}
+	root := globe.Accounts{
+		{
+			Name: "Leon Bogaert",
+		},
+	}
 	inXML, err := xml.MarshalIndent(root, "", "  ")
 	if err != nil {
 		t.Error(err)

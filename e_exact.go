@@ -14,7 +14,7 @@ type EExact struct {
 	// Nodes
 	Settings              Settings              `xml:"Settings,omitempty"`
 	ExchangeRates         ExchangeRates         `xml:"ExchangeRates,omitempty"`
-	Accounts              Accounts              `xml:"Accounts,omitempty"`
+	Accounts              Accounts              `xml:"Accounts>Account,omitempty"`
 	Assortments           Assortments           `xml:"Assortments,omitempty"`
 	Items                 Items                 `xml:"Items,omitempty"`
 	ItemPrices            ItemPrices            `xml:"ItemPrices,omitempty"`
