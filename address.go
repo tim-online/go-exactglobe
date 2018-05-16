@@ -20,7 +20,7 @@ type Address struct {
 	AddressLine3    string          `xml:"AddressLine3,omitempty"`
 	AddressNo       string          `xml:"AddressNo,omitempty"`
 	AddressSuffix   string          `xml:"AddressSuffix,omitempty"`
-	PostalCode      string          `xml:"PostcalCode,omitempty"`
+	PostalCode      string          `xml:"PostalCode,omitempty"`
 	City            string          `xml:"City,omitempty"`
 	County          string          `xml:"County,omitempty"`
 	State           string          `xml:"State,omitempty"`
