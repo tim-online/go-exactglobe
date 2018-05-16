@@ -25,7 +25,7 @@ type Account struct {
 	Email                    string          `xml:"Email,omitempty"`
 	HomePage                 string          `xml:"HomePage,omitempty"`
 	Addresses                Addresses       `xml:"Addresses,omitempty"`
-	Contacts                 Contacts        `xml:"Contacts,omitempty"`
+	Contacts                 Contacts        `xml:"Contacts>Contact,omitempty"`
 	Manager                  Resource        `xml:"Manager,omitempty"`
 	Parent                   *Account        `xml:"Parent,omitempty"`
 	Image                    Image           `xml:"Image,omitempty"`
