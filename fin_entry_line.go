@@ -28,7 +28,7 @@ type FinEntryLine struct {
 	Endtime               Date               `xml:"Endtime,omitempty"`
 	FinYear               FinYear            `xml:"FinYear,omitempty"`
 	FinPeriod             FinPeriod          `xml:"FinPeriod,omitempty"`
-	GLAccount             GLAccount          `xml:"GLAccount,omitempty"`
+	GLAccount             GLAccount          `xml:"GLAccount"`
 	Description           string             `xml:"Description,omitempty"`
 	Costcenter            Costcenter         `xml:"Costcenter,omitempty"`
 	Costunit              Costunit           `xml:"Costunit,omitempty"`
