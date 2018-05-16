@@ -1,5 +1,12 @@
 package globe
 
+import (
+	"encoding/xml"
+
+	"github.com/cydev/zero"
+	"github.com/tim-online/go-exactglobe/omitempty"
+)
+
 type Addresses []Address
 
 type Address struct {
@@ -26,4 +33,12 @@ type Address struct {
 	Email           string          `xml:"Email,omitempty"`
 	Territory       Territory       `xml:"Territory,omitempty"`
 	SalesCommission SalesCommission `xml:"SalesCommission,omitempty"`
+}
+
+func (a Address) MarshalXML(enc *xml.Encoder, start xml.StartElement) error {
+	return omitempty.MarshalXML(a, enc, start)
+}
+
+func (a Address) IsEmpty() bool {
+	return zero.IsZero(a)
 }
