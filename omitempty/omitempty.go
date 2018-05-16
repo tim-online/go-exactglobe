@@ -47,7 +47,13 @@ func MarshalXML(obj interface{}, e *xml.Encoder, start xml.StartElement) error {
 	st := reflect.TypeOf(obj)
 	fs := []reflect.StructField{}
 	for i := 0; i < st.NumField(); i++ {
-		fs = append(fs, st.Field(i))
+		f := st.Field(i)
+		// skip unexported fields
+		if len(f.PkgPath) != 0 {
+			continue
+		}
+
+		fs = append(fs, f)
 	}
 
 	for i, _ := range fs {
@@ -56,7 +62,8 @@ func MarshalXML(obj interface{}, e *xml.Encoder, start xml.StartElement) error {
 		}
 
 		val := reflect.ValueOf(obj)
-		valueField := val.Field(i)
+		j := fs[i].Index[0]
+		valueField := val.Field(j)
 		f := valueField.Interface()
 
 		if isNil(f) {

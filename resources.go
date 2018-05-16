@@ -14,7 +14,7 @@ type Resource struct {
 	Number       int    `xml:"number,attr"`
 	Code         string `xml:"code,attr,omitempty"`
 	Type         string `xml:"type,attr,omitempty"`   // { A | C | E | R | S | T | V }
-	status       string `xml:"status,attr,omitempty"` // { A | H | I | F | R | T }
+	Status       string `xml:"status,attr,omitempty"` // { A | H | I | F | R | T }
 	Gender       string `xml:"gender,attr,omitempty"`
 	License      string `xml:"license,attr,omitempty"`
 	AllDivisions int    `xml:"alldivisions,attr,omitempty"`
