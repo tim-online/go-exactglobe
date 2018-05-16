@@ -23,7 +23,7 @@ type Contact struct {
 	Initials       string     `xml:"Initials,omitempty"`
 	Title          Title      `xml:"Title,omitempty"`
 	Image          Image      `xml:"Image,omitempty"`
-	Addresses      Addresses  `xml:"Addresses,omitempty"`
+	Addresses      Addresses  `xml:"Addresses>Address,omitempty"`
 	Manager        Resource   `xml:"Manager,omitempty"`
 	Language       Language   `xml:"Language,omitempty"`
 	JobTitle       JobTitle   `xml:"JobTitle,omitempty"`

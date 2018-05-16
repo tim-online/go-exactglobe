@@ -24,7 +24,7 @@ type Account struct {
 	Fax                      string          `xml:"Fax,omitempty"`
 	Email                    string          `xml:"Email,omitempty"`
 	HomePage                 string          `xml:"HomePage,omitempty"`
-	Addresses                Addresses       `xml:"Addresses,omitempty"`
+	Addresses                Addresses       `xml:"Addresses>Address,omitempty"`
 	Contacts                 Contacts        `xml:"Contacts>Contact,omitempty"`
 	Manager                  Resource        `xml:"Manager,omitempty"`
 	Parent                   *Account        `xml:"Parent,omitempty"`
