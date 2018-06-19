@@ -4,23 +4,26 @@ import (
 	"encoding/xml"
 
 	"github.com/cydev/zero"
+	errors "github.com/tim-online/go-errors"
 	"github.com/tim-online/go-exactglobe/omitempty"
 )
 
 type FinReferences struct {
-	// [ TransactionOrigin = token: { B | I | P | T | N | U | S } ]>
-	// sequence	 	<ProcessNumberJournal> (0,1)
-	// <UniquePostingNumber> (0,1)
-	// <SequenceNumberEntry> (0,1)
-	// <TransactionNumber2> (0,1)
-	// <LineCode> (0,1)
-	// <YourRef> (0,1)
-	// <DocumentID> (0,1)
-	// <DocumentDate> (0,1)
-	// <DebtorStatementNumber> (0,1)
-	// <StockTrackingNumber> (0,1)
-	// <CashRegister> (0,1)
-	// <ReportDate> (0,1)
+	// Attributes
+	TransactionOrigin TransactionOrigin `xml:"TransactionOrigin,attr,omitempty"`
+
+	ProcessNumberJournal  int    `xml:"ProcessNumberJournal,omitempty"`
+	UniquePostingNumber   int    `xml:"UniquePostingNumber,omitempty"`
+	SequenceNumberEntry   string `xml:"SequenceNumberEntry,omitempty"`
+	TransactionNumber2    string `xml:"TransactionNumber2,omitempty"`
+	LineCode              string `xml:"LineCode,omitempty"`
+	YourRef               string `xml:"YourRef,omitempty"`
+	DocumentID            string `xml:"DocumentID,omitempty"`
+	DocumentDate          Date   `xml:"DocumentDate,omitempty"`
+	DebtorStatementNumber int    `xml:"DebtorStatementNumber,omitempty"`
+	StockTrackingNumber   string `xml:"StockTrackingNumber,omitempty"`
+	CashRegister          string `xml:"CashRegister,omitempty"`
+	ReportDate            Date   `xml:"ReportDate,omitempty"`
 }
 
 func (f FinReferences) MarshalXML(e *xml.Encoder, start xml.StartElement) error {
@@ -29,4 +32,19 @@ func (f FinReferences) MarshalXML(e *xml.Encoder, start xml.StartElement) error 
 
 func (f FinReferences) IsEmpty() bool {
 	return zero.IsZero(f)
+}
+
+type TransactionOrigin string
+
+// I=Invoice, P=Payment, T=Pay in installments, N=None, U=Budget, S=Reconcile
+func (to TransactionOrigin) Validate() error {
+	valid := []TransactionOrigin{"I", "P", "T", "N", "U", "S"}
+
+	for _, v := range valid {
+		if to == v {
+			return nil
+		}
+	}
+
+	return errors.Errorf("Invalid TransactionOrigin '%s'", to)
 }
