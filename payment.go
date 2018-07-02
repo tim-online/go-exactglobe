@@ -11,10 +11,10 @@ import (
 type Payment struct {
 	// Attributes
 	Code          string               `xml:"code,attr,omitempty"`
-	Method        Paymentmethod        `xml:"method,attr,omitempty"`
+	Method        PaymentMethodCode    `xml:"method,attr,omitempty"`
 	OriginPackage PaymentOriginPackage `xml:"OriginPackage,attr,omitempty"`
 
-	Paymentmethod                      Paymentmethod    `xml:"Paymentmethod,omitempty"`
+	PaymentMethod                      PaymentMethod    `xml:"PaymentMethod,omitempty"`
 	PaymentCondition                   PaymentCondition `xml:"PaymentCondition,omitempty"`
 	Reference                          string           `xml:"Reference,omitempty"`
 	OriginalARAPCurrency               string           `xml:"OriginalARAPCurrency,omitempty"`
@@ -40,25 +40,6 @@ func (p Payment) MarshalXML(e *xml.Encoder, start xml.StartElement) error {
 
 func (p Payment) IsEmpty() bool {
 	return zero.IsZero(p)
-}
-
-// K=Cash, B=Bank, G=Giro, I=Collection, A=Giro collection slip, S=Bacs, W=Bill of exchange, D=Bill of exchange, M=Domiciliation, V=ESR payments, Y=ES payments, X=Payments in CHF and FC, Z=Bank cheques
-type Paymentmethod string
-
-func (p Paymentmethod) Validate() error {
-	valid := []Paymentmethod{"K", "B", "G", "I", "A", "C", "S", "W", "D", "M", "V", "Y", "X", "Z"}
-
-	if p == "" {
-		return nil
-	}
-
-	for _, v := range valid {
-		if p == v {
-			return nil
-		}
-	}
-
-	return errors.Errorf("Invalid Paymentmethod '%s'", p)
 }
 
 // F=E-Invoice, A=E-Account, B=E-Payments, C=E-Bank, I=E-Collection, V=E-Assets, T=recurring entries, H=revaluation, O=opening new FY, K=E-Column, S=E-Cost Allocation, R=E-Stock Purchase, W=B/E accounts, E=IncInvReg., D=closing entry, P=E-Job Cost., L=E-Service Management, M=E-PAS, Y=E-Payroll , U=Budget, X=XML

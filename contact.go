@@ -10,6 +10,14 @@ import (
 
 type Contacts []Contact
 
+func (cc Contacts) MarshalXML(e *xml.Encoder, start xml.StartElement) error {
+	return omitempty.MarshalXML(cc, e, start)
+}
+
+func (cc Contacts) IsEmpty() bool {
+	return zero.IsZero(cc)
+}
+
 type Contact struct {
 	// Attributes
 	ID      string        `xml:"ID,attr,omitempty"`
