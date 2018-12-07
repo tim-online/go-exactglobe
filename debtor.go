@@ -27,7 +27,7 @@ type Debtor struct {
 	DebtorInvoice          DebtorInvoice   `xml:"DebtorInvoice,omitempty"`
 	CreditLine             float64         `xml:"CreditLine,omitempty"`
 	Discount               float64         `xml:"Discount,omitempty"`
-	SendReminder           bool            `xml:"SendReminder,omitempty"`
+	SendReminder           Bool            `xml:"SendReminder,omitempty"`
 	AccountEmployee        string          `xml:"AccountEmployee,omitempty"`
 	DateLastReminder       Date            `xml:"DateLastReminder,omitempty"`
 	PrintStatement         bool            `xml:"PrintStatement,omitempty"`
