@@ -22,6 +22,11 @@ func (d Date) IsEmpty() bool {
 	return zero.IsZero(d)
 }
 
+func (d Date) MarshalJSON() ([]byte, error) {
+	layout := "2006-01-02"
+	return json.Marshal(d.Time.Format(layout))
+}
+
 func (d *Date) UnmarshalJSON(b []byte) error {
 	var s string
 	err := json.Unmarshal(b, &s)
