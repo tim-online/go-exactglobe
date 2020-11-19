@@ -14,8 +14,8 @@ type Amount struct {
 	Type AmountType `xml:"type,attr,omitempty"`
 
 	Currency    Currency `xml:"Currency"`
-	Debit       float64  `xml:"Debit,omitempty"`
-	Credit      float64  `xml:"Credit,omitempty"`
+	Debit       float64  `xml:"Debit"`
+	Credit      float64  `xml:"Credit"`
 	Value       float64  `xml:"Value,omitempty"`
 	VAT         VAT      `xml:"VAT,omitempty"`
 	TaxCode2    TaxCode  `xml:"TaxCode2,omitempty"`
